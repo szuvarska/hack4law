@@ -5,7 +5,7 @@ import pandas as pd
 import spacy
 from bs4 import BeautifulSoup
 
-file_path = '../Data/output4.csv'
+file_path = '../Data/output5.csv'
 
 # Read the CSV file into a DataFrame
 df = pd.read_csv(file_path, sep=";")
@@ -22,6 +22,7 @@ df = df[df["judgmentType"] == "SENTENCE"]  # only sentences
 
 # Function to remove HTML tags from a document
 def remove_html_tags(document):
+    print("html")
     # Remove HTML tags
     document = BeautifulSoup(document, 'html.parser').get_text()
 
@@ -30,6 +31,8 @@ def remove_html_tags(document):
 
     return document
 
+
+df = df.dropna(subset=['textContent'])
 
 # Apply the function to the 'html_documents' column
 df['textContent'] = df['textContent'].apply(remove_html_tags)
@@ -43,12 +46,14 @@ nlp.Defaults.stop_words.add("kpc")
 
 # Function to remove punctuation from a document
 def remove_punctuation(document):
+    print("punctuation")
     translator = str.maketrans('', '', string.punctuation)
     return document.translate(translator)
 
 
 # Function to lemmatize a single document with POS tagging
 def lemmatize_document_with_pos_and_punctuation(document):
+    print("lemmatize")
     doc = nlp(remove_punctuation(document))
     lemmatized_tokens = [token.lemma_ if token.pos_ not in {"SPACE"} else token.text for token in doc]
     return ' '.join(lemmatized_tokens)
@@ -59,7 +64,9 @@ df["textContent"] = df["textContent"].apply(lemmatize_document_with_pos_and_punc
 
 
 # Function to lemmatize a single document
+i = 0
 def remove_stopwords(doc):
+    print("stopwords")
     return ' '.join([token.text for token in nlp(doc) if not token.is_stop])
 
 
@@ -68,7 +75,9 @@ df['textContent'] = df['textContent'].apply(remove_stopwords)
 
 print(df["textContent"].iloc[0])
 
+i = 0
 def remove_white_spaces(document):
+    print("whitespaces")
     # Remove newlines and extra white spaces, but keep spaces
     document = re.sub(r'\s+', ' ', document)
 
@@ -83,4 +92,4 @@ df['textContent'] = df['textContent'].apply(remove_white_spaces)
 print(df["textContent"].iloc[0])
 
 # Save clean data to csv
-df.to_csv("../Data/clean_output1.csv", sep=";", index=False)
+df.to_csv("../Data/clean_output2.csv", sep=";", index=False)
