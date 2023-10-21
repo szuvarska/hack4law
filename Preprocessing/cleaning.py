@@ -5,7 +5,7 @@ import pandas as pd
 import spacy
 from bs4 import BeautifulSoup
 
-file_path = '../Data/output4.csv'
+file_path = 'Data/output5.csv'
 
 # Read the CSV file into a DataFrame
 df = pd.read_csv(file_path, sep=";")
