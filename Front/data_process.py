@@ -2,7 +2,7 @@ import pandas as pd
 import json
 import re
 df = pd.read_csv("clean_output1.csv", sep=';')
-
+pd.options.mode.chained_assignment = None
 # print(df)
 
 # print(df['judges'])
@@ -12,7 +12,6 @@ def get_judges(df):
     for i in range (df.shape[0]):
         
         df['judges'][i] = re.findall(pattern, df['judges'][i])
-        
 
     return df
 

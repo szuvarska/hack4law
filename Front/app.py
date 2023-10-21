@@ -67,7 +67,7 @@ app_ui = ui.page_navbar(
                 ui.panel_main(
                         Title,
                         duzy_div_orz,
-                        ui.include_css("www\my-styles.css"),
+                        ui.include_css("www/my-styles.css"),
                         ui.output_text_verbatim("txt_kw")
                         )
            )
@@ -91,3 +91,4 @@ def server(input: Inputs, output: Outputs, session: Session):
 
 
 app = App(app_ui, server)
+app.run(port=8080)
