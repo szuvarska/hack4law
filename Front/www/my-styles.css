@@ -1,58 +1,73 @@
 body{
     
-    background-color: rgba(11, 93, 125, 0.6);
+    background-color: #0096c7;
 }
 .form-control{
-    background-color: rgba(218, 255, 251);
+    background-color: #caf0f8;
+    border-radius: 5px;
+    height: 200px;
+    resize: none;
+
+}
+.form-control:focus{
+    background-color: #caf0f8;
+    border-radius: 5px;
+    height: 200px;
 }
 
 .bslib-sidebar-layout>.sidebar{
-    background-color: rgba(23, 107, 135,0.7);
+    background-color: #0077b6;
+    border-radius: 5px;
 }
 .navbar>.container-fluid{
     background-color: rgba(236, 239, 239, 0.8);
+
 }
-
+.html-fill-item{
+    border-color: #0096c7;
+}
 .lista{
-    background-color: rgba(218, 255, 251);
-    padding: 10px 10px 10px 10px;
-
+    background-color: #caf0f8;
+    padding: 17px 17px 17px 17px;
+    border-radius: 5px;
 }
 .selectize-control.multi{
 
-    background-color: rgba(218, 255, 251);
+    background-color: #caf0f8;
+    border-radius: 5px;
 
 }
 .selectizedshiny-bound-input{
 
-    border-color: rgba(218, 255, 251);
-    background-color: rgba(218, 255, 251);
+    border-color: #caf0f8;
+    background-color: #caf0f8;
 }
 /* .option{
-    border-color: rgba(218, 255, 251);
-    background-color: rgba(218, 255, 251);
+    border-color: #caf0f8;
+    background-color: #caf0f8;
 } 
 Zmienia w rozwijanym menu */
 
 .selectize-input.items.not-full.has-options.has-items.item{
     
-    background-color: rgba(218, 255, 251);
-    color: rgba(218, 255, 251);
+    background-color: #caf0f8;
+    color: #caf0f8;
 }
 
 
 .selectize-input.items.not-full.has-options{
-    border-color: rgba(218, 255, 251);
-    background-color: rgba(218, 255, 251);
+    border-color: #caf0f8;
+    background-color: #caf0f8;
 
 }
 .orzeczenie{
 
-    background-color:#f5ebe0;
+    background-color:#ade8f4;
     border-style: solid;
-    border-color: #d5bdaf;
+    border-color: #ade8f4;
     border-width: 2px;
     margin-bottom: 5px;
+    border-radius: 5px;
 }
 
 .sygnatura{
@@ -102,18 +117,25 @@ Zmienia w rozwijanym menu */
 
 
 .selectize-control.multi.selectize-input>div.item{
-    border-color: rgba(218, 255, 251);
-    background: rgba(218, 255, 251)!important;
+    border-color: #caf0f8;
+    background: #caf0f8!important;
 
 }
 
-
 .selectize-input.items.not-full.has-options.has-items{
-    border-color: rgba(218, 255, 251);
-    background-color: rgba(218, 255, 251);
+    border-color: #caf0f8;
+    background-color: #caf0f8;
 }
 
 .item{
-    border-color: rgba(218, 255, 251);
-    background-color: rgba(218, 255, 251);
+    border-color: #00b4d8;
+    background: #00b4d8 !important;
+}
+
+.selectize-dropdown-content .active {
+background: #00b4d8 !important;
+}
+
+.selectize-dropdown-content {
+background: #caf0f8 !important;
 }
