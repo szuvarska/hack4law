@@ -44,7 +44,7 @@ for i in range(10):
     # sad = div("Sąd: " + sad1, id='elem', class_='sad')
     orzeczenie_tekst = div(tekst_orze, id='elem', class_='orzeczenie_tekst')
 
-    idk = (sygn, sedzia, data, sad, orzeczenie_tekst)
+    idk = (sygn, sedzia, data, orzeczenie_tekst)
     orze_1 = div(idk, id="single_orz", class_='orzeczenie')
     LISTA_GIGA_DUZA.append(orze_1)
 
