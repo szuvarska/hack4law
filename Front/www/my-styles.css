@@ -1,0 +1,107 @@
+body{
+    
+    background-color: rgba(11, 93, 125, 0.6);
+}
+.form-control{
+    background-color: rgba(218, 255, 251);
+}
+
+.bslib-sidebar-layout>.sidebar{
+    background-color: rgba(23, 107, 135,0.7);
+}
+.navbar>.container-fluid{
+    background-color: rgba(236, 239, 239, 0.8);
+}
+
+.lista{
+    background-color: rgba(218, 255, 251);
+    padding: 10px 10px 10px 10px;
+
+}
+.selectize-control.multi{
+
+    background-color: rgba(218, 255, 251);
+
+}
+.selectizedshiny-bound-input{
+
+    border-color: rgba(218, 255, 251);
+    background-color: rgba(218, 255, 251);
+}
+/* .option{
+    border-color: rgba(218, 255, 251);
+    background-color: rgba(218, 255, 251);
+} 
+Zmienia w rozwijanym menu */
+
+.selectize-input items.not-full.has-options.has-items.item{
+    
+    background-color: rgba(218, 255, 251);
+    color: rgba(218, 255, 251);
+}
+
+
+.selectize-input.items.not-full.has-options{
+    border-color: rgba(218, 255, 251);
+    background-color: rgba(218, 255, 251);
+
+}
+.orzeczenie{
+
+    background-color:#f5ebe0;
+    border-style: solid;
+    border-color: #d5bdaf;
+    border-width: 2px;
+    margin-bottom: 5px;
+}
+
+.sygnatura{
+
+    margin-bottom: 3px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.sedzia{
+    margin-bottom: 3px;
+    text-align: left;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+.data{
+    margin-bottom: 3px;
+    text-align: left;
+    font-size: 0.9em;
+}
+
+.sad{
+    margin-bottom: 3px;
+    text-align: left;
+    font-size: 0.9em;
+}
+.orzeczenie_tekst{
+    margin-bottom: 7px;
+    text-align: justify;
+    font-size: 1.1em;
+    
+}
+
+
+.selectize-control.multi.selectize-input>div.item{
+    border-color: rgba(218, 255, 251);
+    background: rgba(218, 255, 251)!important;
+
+}
+
+
+.selectize-input.items.not-full.has-options.has-items{
+    border-color: rgba(218, 255, 251);
+    background-color: rgba(218, 255, 251);
+}
+
+.item{
+    border-color: rgba(218, 255, 251);
+    background-color: rgba(218, 255, 251);
+}

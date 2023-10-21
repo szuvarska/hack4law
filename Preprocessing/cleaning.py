@@ -1,11 +1,10 @@
 import string
 import textwrap
-
+import re
 import pandas as pd
 import spacy
 from bs4 import BeautifulSoup
 
-# Replace 'your_file.csv' with the path to your CSV file
 file_path = '../Data/output4.csv'
 
 # Read the CSV file into a DataFrame
@@ -14,15 +13,22 @@ df = df.drop(df.columns[0], axis=1)
 
 df = df[df["courtType"] == "COMMON"]  # only common courts
 
+df = df[df["judgmentType"] == "SENTENCE"]  # only sentences
+
+
 # Print the pretty printed string
 # print(textwrap.fill(df["textContent"].iloc[0], width=60))
 
 
 # Function to remove HTML tags from a document
-def remove_html_tags(html_document):
-    soup = BeautifulSoup(html_document, 'html.parser')
-    text_without_tags = soup.get_text()
-    return text_without_tags
+def remove_html_tags(document):
+    # Remove HTML tags
+    document = BeautifulSoup(document, 'html.parser').get_text()
+
+    # Remove single letters
+    # document = ' '.join([word for word in document.split() if len(word) > 1])
+
+    return document
 
 
 # Apply the function to the 'html_documents' column
@@ -31,6 +37,9 @@ df['textContent'] = df['textContent'].apply(remove_html_tags)
 # Load the Polish model
 nlp = spacy.load("pl_core_news_sm")
 
+# We want to treat "kpc" as a stop word too
+nlp.Defaults.stop_words.add("kpc")
+
 
 # Function to remove punctuation from a document
 def remove_punctuation(document):
@@ -38,7 +47,7 @@ def remove_punctuation(document):
     return document.translate(translator)
 
 
-# Function to lemmatize a single document with POS tagging after removing punctuation
+# Function to lemmatize a single document with POS tagging
 def lemmatize_document_with_pos_and_punctuation(document):
     doc = nlp(remove_punctuation(document))
     lemmatized_tokens = [token.lemma_ if token.pos_ not in {"SPACE"} else token.text for token in doc]
@@ -48,6 +57,7 @@ def lemmatize_document_with_pos_and_punctuation(document):
 # Lemmatize all documents in a DataFrame with POS tagging and after removing punctuation
 df["textContent"] = df["textContent"].apply(lemmatize_document_with_pos_and_punctuation)
 
+
 # Function to lemmatize a single document
 def remove_stopwords(doc):
     return ' '.join([token.text for token in nlp(doc) if not token.is_stop])
@@ -55,6 +65,19 @@ def remove_stopwords(doc):
 
 # Apply the function to the 'documents' column
 df['textContent'] = df['textContent'].apply(remove_stopwords)
+
+print(df["textContent"].iloc[0])
+
+def remove_white_spaces(document):
+    # Remove newlines and extra white spaces, but keep spaces
+    document = re.sub(r'\s+', ' ', document)
+
+    # Remove spaces between numbers and the section sign (§)
+    document = re.sub(r'(\d) (\§) (\d)', r'\1\2\3', document)
+    return document
+
+
+df['textContent'] = df['textContent'].apply(remove_white_spaces)
 
 # Print the cleaned documents
 print(df["textContent"].iloc[0])
