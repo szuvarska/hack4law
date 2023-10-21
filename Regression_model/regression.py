@@ -19,24 +19,27 @@ df2 = df2[["id","uzasadnienie"]]
 
 df = pd.merge(df1, df2, on='id', how='inner')
 
-vectorizer = TfidfVectorizer()
-X = vectorizer.fit_transform(df['uzasadnienie'])
+# Save the DataFrame to CSV
+df.to_csv('../Data/decisions_with_uzasadnienie.csv', sep=';', encoding='utf-8-sig')
 
-X_train, X_test, y_train, y_test = train_test_split(X, df['sumOfMoney'], test_size=0.2, random_state=42)
-
-model = LinearRegression()
-model.fit(X_train, y_train)
-
-y_pred = model.predict(X_test)
-
-mae = mean_absolute_error(y_test, y_pred)
-mse = mean_squared_error(y_test, y_pred)
-r2 = r2_score(y_test, y_pred)
-
-print(f"MAE: {mae}")
-print(f"MSE: {mse}")
-print(f"R-squared: {r2}")
-
-# Save the model to a file
-joblib.dump(model, 'regression_model.pkl')
+# vectorizer = TfidfVectorizer()
+# X = vectorizer.fit_transform(df['uzasadnienie'])
+#
+# X_train, X_test, y_train, y_test = train_test_split(X, df['sumOfMoney'], test_size=0.2, random_state=42)
+#
+# model = LinearRegression()
+# model.fit(X_train, y_train)
+#
+# y_pred = model.predict(X_test)
+#
+# mae = mean_absolute_error(y_test, y_pred)
+# mse = mean_squared_error(y_test, y_pred)
+# r2 = r2_score(y_test, y_pred)
+#
+# print(f"MAE: {mae}")
+# print(f"MSE: {mse}")
+# print(f"R-squared: {r2}")
+#
+# # Save the model to a file
+# joblib.dump(model, 'regression_model.pkl')
 
