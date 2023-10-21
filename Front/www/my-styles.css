@@ -34,7 +34,7 @@ body{
 } 
 Zmienia w rozwijanym menu */
 
-.selectize-input items.not-full.has-options.has-items.item{
+.selectize-input.items.not-full.has-options.has-items.item{
     
     background-color: rgba(218, 255, 251);
     color: rgba(218, 255, 251);
@@ -66,26 +66,38 @@ Zmienia w rozwijanym menu */
 .sedzia{
     margin-bottom: 3px;
     text-align: left;
-    font-style: italic;
     font-size: 0.9em;
+    margin-left: 3px;
 }
 
 .data{
     margin-bottom: 3px;
     text-align: left;
     font-size: 0.9em;
+    margin-left: 3px;
 }
 
 .sad{
     margin-bottom: 3px;
     text-align: left;
     font-size: 0.9em;
+    margin-left: 3px;
 }
 .orzeczenie_tekst{
     margin-bottom: 7px;
     text-align: justify;
-    font-size: 1.1em;
+    font-size: 0.7em;
+    margin-left: 4px;
+    margin-right: 4px;
     
+
+}
+.tytul{
+    font-size: 2em;
+    background-color: (23, 107, 135,0.7);
+    text-align: center;
+    font-weight: bold;
+    padding: 5px;
 }
 
 
