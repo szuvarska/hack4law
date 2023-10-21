@@ -1,16 +1,14 @@
 import pandas as pd
+import re
 
+data = pd.read_csv("../Data/clean_output1.csv", sep=";")
 def filterdata(df):
     df = df[df["courtType"] == "COMMON"]
     # judgeType = SENTENCE or REASONS
     df = df[df["judgmentType"] == "SENTENCE"]
     return df
 
-data = pd.read_csv("../Data/clean_output1.csv", sep=";")
-filtered_data = filterdata(data)
 
-
-import re
 def uzasadnienie(text):
     #print(text)
     start = re.search("UZASADNIENIE", text)
@@ -21,16 +19,11 @@ def uzasadnienie(text):
         return text
 
 
-filtered_data["textContent"] = filtered_data["textContent"].astype(str)
-#new column with uzasadnienie
-
-
-filtered_data["uzasadnienie"] = filtered_data["textContent"].apply(uzasadnienie)
-
-
-#print( len(filtered_data["textContent"]))
-#print((filtered_data["uzasadnienie"]))
-
+def get_uzasadnienie(df):
+    df = filterdata(df)
+    df["textContent"] = df["textContent"].astype(str)
+    df["uzasadnienie"] = df["textContent"].apply(uzasadnienie)
+    return df
 
 def check():
     for i in range ( len(filtered_data["textContent"])):
@@ -43,4 +36,8 @@ def check():
             print("#######################################################")
         #print(data["textContent"].iloc[10])
 
-check()
+#saving to csv
+with_uzasadnienie = get_uzasadnienie(data)
+with_uzasadnienie.to_csv("../Data/with_uzasadnienie.csv", sep=";", index=False)
+
+#check()
