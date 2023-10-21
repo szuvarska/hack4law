@@ -66,26 +66,31 @@ Zmienia w rozwijanym menu */
 .sedzia{
     margin-bottom: 3px;
     text-align: left;
-    font-style: italic;
     font-size: 0.9em;
+    margin-left: 3px;
 }
 
 .data{
     margin-bottom: 3px;
     text-align: left;
     font-size: 0.9em;
+    margin-left: 3px;
 }
 
 .sad{
     margin-bottom: 3px;
     text-align: left;
     font-size: 0.9em;
+    margin-left: 3px;
 }
 .orzeczenie_tekst{
     margin-bottom: 7px;
     text-align: justify;
     font-size: 0.7em;
+    margin-left: 4px;
+    margin-right: 4px;
     
+
 }
 .tytul{
     font-size: 2em;
