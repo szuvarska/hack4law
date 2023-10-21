@@ -106,4 +106,4 @@ for t in threads:
     t.join()
 
 result = pd.DataFrame([output_list[i][1]["data"] for i in range(len(output_list))])
-result.to_csv("output.csv", index=False)
+result.to_csv("./Data/output.csv", index=False)
