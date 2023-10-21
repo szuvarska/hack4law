@@ -8,6 +8,10 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores import Chroma
 from langchain.schema import Document
 
+
+# Potrzebne pakiety to: 'langchain[chromadb], sentence-transformer i chromadb
+
+
 def return_df_with_similarities(query:str, data_path = 'Data/decisions_with_uzasadnienie.csv' ):
 
     model_name = "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
@@ -43,5 +47,5 @@ def return_df_with_similarities(query:str, data_path = 'Data/decisions_with_uzas
     df['id'] = df['id'].astype('str')
     df = df[[col for col in df.columns if col!="uzasadnienie"]]
     merged = df_results.merge(df, on='id', how='inner')
-    
+
     return merged
