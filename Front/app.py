@@ -46,7 +46,8 @@ app_ui = ui.page_navbar(
                 ),
                 ui.panel_main(
                         Title,
-                        duzy_div_orz,
+                        ui.output_ui("dajDivOrze"),
+                        ui.input_switch('czytajmore', "Czytaj więcej"),
                         ui.include_css("www/my-styles.css"),
                         ui.output_text_verbatim("txt_kw"),
                         ui.output_text_verbatim("txtfull")
@@ -68,6 +69,47 @@ def server(input: Inputs, output: Outputs, session: Session):
     @render.text
     def txtfull():
         return input.txtfull()
+
+    def dajOrzeczenie(df, limit = 1000, tru = True):
+        LISTA_GIGA_DUZA = []
+        for i in range(1):
+
+            sygn1 = df['courtCases'][i]
+            sedzia1 = ", ".join(df['judges'][i])
+            data1 = df['judgmentDate'][i]
+            tekst_orze = df['textContent'][i]
+            if tru==False:
+                tekst_orze = tekst_orze[:limit] + "..."
+            else:
+                tekst_orze = tekst_orze
+
+
+            sygn = div(sygn1, id='elem', class_='sygnatura')
+            sedzia = div("Skład sędziowski: " + sedzia1, id='elem', class_='sedzia')
+            data = div("Data: " + data1, id='elem', class_='data')
+            orzeczenie_tekst = div(tekst_orze, id='elem', class_='orzeczenie_tekst')
+
+            idk = (sygn, sedzia, data, orzeczenie_tekst)
+            orze_1 = div(idk, id="single_orz", class_='orzeczenie')
+            LISTA_GIGA_DUZA.append(orze_1)
+
+        duzy_div_orz = div(LISTA_GIGA_DUZA, id='duzy_div_orz', class_='lista')
+
+        return duzy_div_orz
+    
+    
+
+    @output
+    @render.ui
+    def value():
+        return input.czytajmore()
+        
+
+
+    @output
+    @render.ui
+    def dajDivOrze():
+        return dajOrzeczenie(df, 1000, input.czytajmore())
 
 app = App(app_ui, server)
 app.run(port=8080)
