@@ -36,12 +36,12 @@ for i in range(10):
     sygn1 = df['courtCases'][i]
     sedzia1 = ", ".join(df['judges'][i])
     data1 = df['judgmentDate'][i]
-    sad1 = df['courtType'][i]
+    # sad1 = df['courtType'][i]
     tekst_orze = df['textContent'][i]
     sygn = div(sygn1, id='elem', class_='sygnatura')
     sedzia = div("Skład sędziowski: " + sedzia1, id='elem', class_='sedzia')
     data = div("Data: " + data1, id='elem', class_='data')
-    sad = div("Sąd: " + sad1, id='elem', class_='sad')
+    # sad = div("Sąd: " + sad1, id='elem', class_='sad')
     orzeczenie_tekst = div(tekst_orze, id='elem', class_='orzeczenie_tekst')
 
     idk = (sygn, sedzia, data, sad, orzeczenie_tekst)
