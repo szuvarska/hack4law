@@ -16,25 +16,6 @@ hell = ui.a('Hej', href = "https://shiny.posit.co/py/api/ui.panel_main.html")
 
 Title = div("Znalezione podobne orzeczenia", id = 'tytul', class_='tytul')
 
-LISTA_GIGA_DUZA = []
-
-for i in range(10):
-
-    sygn1 = df['courtCases'][i]
-    sedzia1 = ", ".join(df['judges'][i])
-    data1 = df['judgmentDate'][i]
-    tekst_orze = df['textContent'][i]
-    sygn = div(sygn1, id='elem', class_='sygnatura')
-    sedzia = div("Skład sędziowski: " + sedzia1, id='elem', class_='sedzia')
-    data = div("Data: " + data1, id='elem', class_='data')
-    orzeczenie_tekst = div(tekst_orze, id='elem', class_='orzeczenie_tekst')
-
-    idk = (sygn, sedzia, data, orzeczenie_tekst)
-    orze_1 = div(idk, id="single_orz", class_='orzeczenie')
-    LISTA_GIGA_DUZA.append(orze_1)
-
-duzy_div_orz = div(LISTA_GIGA_DUZA, id='duzy_div_orz', class_='lista')
-
 app_ui = ui.page_navbar(
     ui.nav('Znajdź podobne',
            ui.layout_sidebar(
@@ -46,11 +27,41 @@ app_ui = ui.page_navbar(
                 ),
                 ui.panel_main(
                         Title,
-                        ui.output_ui("dajDivOrze"),
-                        ui.input_switch('czytajmore', "Czytaj więcej"),
+                        ui.output_ui("dajDivOrze0"),
+                        ui.input_switch('czytajmore0', "Czytaj więcej"),
+
+                        ui.output_ui("dajDivOrze1"),
+                        ui.input_switch('czytajmore1', "Czytaj więcej"),
+
+                        ui.output_ui("dajDivOrze2"),
+                        ui.input_switch('czytajmore2', "Czytaj więcej"),
+
+                        ui.output_ui("dajDivOrze3"),
+                        ui.input_switch('czytajmore3', "Czytaj więcej"),
+
+                        ui.output_ui("dajDivOrze4"),
+                        ui.input_switch('czytajmore4', "Czytaj więcej"),
+
+                        ui.output_ui("dajDivOrze5"),
+                        ui.input_switch('czytajmore5', "Czytaj więcej"),
+
+                        ui.output_ui("dajDivOrze6"),
+                        ui.input_switch('czytajmore6', "Czytaj więcej"),
+
+                        ui.output_ui("dajDivOrze7"),
+                        ui.input_switch('czytajmore7', "Czytaj więcej"),
+
+                        ui.output_ui("dajDivOrze8"),
+                        ui.input_switch('czytajmore8', "Czytaj więcej"),
+
+                        ui.output_ui("dajDivOrze9"),
+                        ui.input_switch('czytajmore9', "Czytaj więcej"),
+                        
+
                         ui.include_css("www/my-styles.css"),
-                        ui.output_text_verbatim("txt_kw"),
-                        ui.output_text_verbatim("txtfull")
+
+          
+                        
                         )
            )
         ),
@@ -70,28 +81,35 @@ def server(input: Inputs, output: Outputs, session: Session):
     def txtfull():
         return input.txtfull()
 
-    def dajOrzeczenie(df, limit = 1000, tru = True):
+    def dajOrzeczenie(df, i = 1, limit = 1000, tru = True):
+
+        try:
+            df['id'][i]
+        except:
+            return None
+
+
         LISTA_GIGA_DUZA = []
-        for i in range(1):
+        
+        
+        sygn1 = df['courtCases'][i]
+        sedzia1 = ", ".join(df['judges'][i])
+        data1 = df['judgmentDate'][i]
+        tekst_orze = df['textContent'][i]
+        if tru==False:
+            tekst_orze = tekst_orze[:limit] + "..."
+        else:
+            tekst_orze = tekst_orze
 
-            sygn1 = df['courtCases'][i]
-            sedzia1 = ", ".join(df['judges'][i])
-            data1 = df['judgmentDate'][i]
-            tekst_orze = df['textContent'][i]
-            if tru==False:
-                tekst_orze = tekst_orze[:limit] + "..."
-            else:
-                tekst_orze = tekst_orze
 
+        sygn = div(sygn1, id='elem', class_='sygnatura')
+        sedzia = div("Skład sędziowski: " + sedzia1, id='elem', class_='sedzia')
+        data = div("Data: " + data1, id='elem', class_='data')
+        orzeczenie_tekst = div(tekst_orze, id='elem', class_='orzeczenie_tekst')
 
-            sygn = div(sygn1, id='elem', class_='sygnatura')
-            sedzia = div("Skład sędziowski: " + sedzia1, id='elem', class_='sedzia')
-            data = div("Data: " + data1, id='elem', class_='data')
-            orzeczenie_tekst = div(tekst_orze, id='elem', class_='orzeczenie_tekst')
-
-            idk = (sygn, sedzia, data, orzeczenie_tekst)
-            orze_1 = div(idk, id="single_orz", class_='orzeczenie')
-            LISTA_GIGA_DUZA.append(orze_1)
+        idk = (sygn, sedzia, data, orzeczenie_tekst)
+        orze_1 = div(idk, id="single_orz", class_='orzeczenie')
+        LISTA_GIGA_DUZA.append(orze_1)
 
         duzy_div_orz = div(LISTA_GIGA_DUZA, id='duzy_div_orz', class_='lista')
 
@@ -101,15 +119,106 @@ def server(input: Inputs, output: Outputs, session: Session):
 
     @output
     @render.ui
-    def value():
-        return input.czytajmore()
+    def value0():
+        return input.czytajmore0()
+
+    @output
+    @render.ui
+    def value1():
+        return input.czytajmore1()
+
+    @output
+    @render.ui
+    def value2():
+        return input.czytajmore2()
+
+    @output
+    @render.ui
+    def value3():
+        return input.czytajmore3()
+
+    @output
+    @render.ui
+    def value4():
+        return input.czytajmore4()
+
+    @output
+    @render.ui
+    def value5():
+        return input.czytajmore5()
+
+    @output
+    @render.ui
+    def value6():
+        return input.czytajmore6()
+
+    @output
+    @render.ui
+    def value7():
+        return input.czytajmore7()
+
+    @output
+    @render.ui
+    def value8():
+        return input.czytajmore8()
+
+    @output
+    @render.ui
+    def value9():
+        return input.czytajmore9()
         
 
 
     @output
     @render.ui
-    def dajDivOrze():
-        return dajOrzeczenie(df, 1000, input.czytajmore())
+    def dajDivOrze0():
+        return dajOrzeczenie(df, 0, 1000, input.czytajmore0())
+
+    @output
+    @render.ui
+    def dajDivOrze1():
+        return dajOrzeczenie(df, 1, 1000, input.czytajmore1())
+
+    @output
+    @render.ui
+    def dajDivOrze2():
+        return dajOrzeczenie(df, 2, 1000, input.czytajmore2())
+
+    @output
+    @render.ui
+    def dajDivOrze3():
+        return dajOrzeczenie(df, 3, 1000, input.czytajmore3())
+
+    @output
+    @render.ui
+    def dajDivOrze4():
+        return dajOrzeczenie(df, 4, 1000, input.czytajmore4())
+
+    @output
+    @render.ui
+    def dajDivOrze5():
+        return dajOrzeczenie(df, 5, 1000, input.czytajmore5())
+
+    @output
+    @render.ui
+    def dajDivOrze6():
+        return dajOrzeczenie(df, 6, 1000, input.czytajmore6())
+
+    @output
+    @render.ui
+    def dajDivOrze7():
+        return dajOrzeczenie(df, 7, 1000, input.czytajmore7())
+
+    @output
+    @render.ui
+    def dajDivOrze8():
+        return dajOrzeczenie(df, 8, 1000, input.czytajmore8())
+
+    @output
+    @render.ui
+    def dajDivOrze9():
+        return dajOrzeczenie(df, 9, 1000, input.czytajmore9())
+    
 
 app = App(app_ui, server)
 app.run(port=8080)
