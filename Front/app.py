@@ -58,7 +58,7 @@ app_ui = ui.page_navbar(
                         ui.input_switch('czytajmore9', "Czytaj więcej"),
                         
 
-                        ui.include_css("www/my-styles.css"),
+                        ui.include_css("Front/www/my-styles.css"),
 
           
                         

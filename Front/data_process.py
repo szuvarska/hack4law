@@ -1,8 +1,9 @@
 import pandas as pd
 import re
-df = pd.read_csv("clean_output2.csv", sep=';')
 pd.options.mode.chained_assignment = None
+#from Similarity import find_similar as fs
 
+df = pd.read_csv("Front/clean_output1.csv",sep = ';')
 def get_judges(df):
     pattern = r"'name': '(.*?)',"
     for i in range (df.shape[0]):
@@ -16,5 +17,4 @@ def get_caseNumber(df):
         df['courtCases'][i] = re.findall(pattern, df['courtCases'][i])
     return df
 
-df_r = get_judges(df)
-df_r = get_caseNumber(df_r)
+df = get_caseNumber(get_judges(df))
