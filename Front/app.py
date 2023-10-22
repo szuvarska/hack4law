@@ -6,6 +6,7 @@ from shiny.types import NavSetArg
 from htmltools import Tag, TagList, div
 import shiny.experimental
 import re
+import json
 import pandas as pd
 
 from pathlib import Path
@@ -83,37 +84,34 @@ app_ui = ui.page_navbar(
                 ui.panel_main(
                         Title,
                         ui.output_ui("decision"),
-                        ui.input_action_button('more', 'More'),
+                        ui.input_action_button('more', 'Więcej'),
 
-                        ui.output_ui("dajDivOrze0"),
-                        ui.input_switch('czytajmore0', "Czytaj więcej"),
+                        # ui.output_ui("dajDivOrze1"),
+                        # ui.input_switch('czytajmore1', "Czytaj więcej"),
 
-                        ui.output_ui("dajDivOrze1"),
-                        ui.input_switch('czytajmore1', "Czytaj więcej"),
+                        # ui.output_ui("dajDivOrze2"),
+                        # ui.input_switch('czytajmore2', "Czytaj więcej"),
 
-                        ui.output_ui("dajDivOrze2"),
-                        ui.input_switch('czytajmore2', "Czytaj więcej"),
+                        # ui.output_ui("dajDivOrze3"),
+                        # ui.input_switch('czytajmore3', "Czytaj więcej"),
 
-                        ui.output_ui("dajDivOrze3"),
-                        ui.input_switch('czytajmore3', "Czytaj więcej"),
+                        # ui.output_ui("dajDivOrze4"),
+                        # ui.input_switch('czytajmore4', "Czytaj więcej"),
 
-                        ui.output_ui("dajDivOrze4"),
-                        ui.input_switch('czytajmore4', "Czytaj więcej"),
+                        # ui.output_ui("dajDivOrze5"),
+                        # ui.input_switch('czytajmore5', "Czytaj więcej"),
 
-                        ui.output_ui("dajDivOrze5"),
-                        ui.input_switch('czytajmore5', "Czytaj więcej"),
+                        # ui.output_ui("dajDivOrze6"),
+                        # ui.input_switch('czytajmore6', "Czytaj więcej"),
 
-                        ui.output_ui("dajDivOrze6"),
-                        ui.input_switch('czytajmore6', "Czytaj więcej"),
+                        # ui.output_ui("dajDivOrze7"),
+                        # ui.input_switch('czytajmore7', "Czytaj więcej"),
 
-                        ui.output_ui("dajDivOrze7"),
-                        ui.input_switch('czytajmore7', "Czytaj więcej"),
+                        # ui.output_ui("dajDivOrze8"),
+                        # ui.input_switch('czytajmore8', "Czytaj więcej"),
 
-                        ui.output_ui("dajDivOrze8"),
-                        ui.input_switch('czytajmore8', "Czytaj więcej"),
-
-                        ui.output_ui("dajDivOrze9"),
-                        ui.input_switch('czytajmore9', "Czytaj więcej"),
+                        # ui.output_ui("dajDivOrze9"),
+                        # ui.input_switch('czytajmore9', "Czytaj więcej"),
                         
 
                         ui.include_css("Front/www/my-styles.css"),
@@ -125,6 +123,11 @@ app_ui = ui.page_navbar(
         ),
     title='Przeanalizuj mnie'
 )
+
+def get_one_casenumber(json_string):
+    pattern = r"'caseNumber': '(.*?)'"
+    return re.search(pattern, json_string).group(1)
+
 
 
 def server(input: Inputs, output: Outputs, session: Session):
@@ -150,7 +153,8 @@ def server(input: Inputs, output: Outputs, session: Session):
             return None
 
         sygn1 = df['courtCases'][i]
-        sedzia1 = ", ".join(df['judges'][i])
+        caseNumber = get_one_casenumber(sygn1)
+        # sedzia1 = ", ".join(df['judges'][i])
         data1 = df['judgmentDate'][i]
         tekst_orze = df['textContent'][i]
         if tru==False:
@@ -159,12 +163,12 @@ def server(input: Inputs, output: Outputs, session: Session):
             tekst_orze = tekst_orze
 
 
-        sygn = div(sygn1, id='elem', class_='sygnatura')
-        sedzia = div("Skład sędziowski: " + sedzia1, id='elem', class_='sedzia')
+        sygn = div(caseNumber, id='elem', class_='sygnatura')
+        # sedzia = div("Skład sędziowski: " + sedzia1, id='elem', class_='sedzia')
         data = div("Data: " + data1, id='elem', class_='data')
         orzeczenie_tekst = div(tekst_orze, id='elem', class_='orzeczenie_tekst')
 
-        idk = (sygn, sedzia, data, orzeczenie_tekst)
+        idk = (sygn, data, orzeczenie_tekst)
         orze_1 = div(idk, id="single_orz", class_='orzeczenie')
 
         return div([orze_1], id='duzy_div_orz', class_='lista')
@@ -192,9 +196,7 @@ def server(input: Inputs, output: Outputs, session: Session):
     @reactive.event(input.go)
     def value():
         print('co')
-        global_df.set(
-            return_df_with_similarities(input.txtfull())
-        )
+        global_df.set(return_df_with_similarities(input.txtfull()))
         print(global_df.get())
         print(global_df)
 
@@ -212,7 +214,7 @@ def server(input: Inputs, output: Outputs, session: Session):
         if global_df.get() is not None:
             print("YEY")
             local_copy = global_list.get()
-            new_div = getOneDecision(global_df.get(), global_number.get(), 1000, input.czytajmore0())
+            new_div = getOneDecision(global_df.get(), global_number.get(), 1000, False)
             if len(local_copy) == 0:
                 global_list.set(tuple([new_div]))
             else:
