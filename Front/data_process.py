@@ -53,6 +53,8 @@ def return_df_with_similarities(query:str, tags = ['Kary pieniężne', 'Wyrówna
     filtered_merged = filtered_merged.sort_values(by=['similarity'], ascending=True).iloc[:10, :]
     return filtered_merged
 
+
+df = pd.read_csv("Front/clean_output1.csv",sep = ';')
 def get_judges(df):
     pattern = r"'name': '(.*?)',"
     for i in range (df.shape[0]):
@@ -69,3 +71,4 @@ def get_caseNumber(df):
 df = pd.read_csv('../Data/clean_output2')
 df_r = get_judges(df)
 df_r = get_caseNumber(df_r)
+
