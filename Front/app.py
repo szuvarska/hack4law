@@ -87,7 +87,7 @@ app_ui = ui.page_navbar(
                         ui.input_action_button('more', 'Więcej'),
 
                         # ui.output_ui("dajDivOrze1"),
-                        # ui.input_switch('czytajmore1', "Czytaj więcej"),
+                        ui.input_switch('czytajmore', "Czytaj więcej"),
 
                         # ui.output_ui("dajDivOrze2"),
                         # ui.input_switch('czytajmore2', "Czytaj więcej"),
@@ -195,10 +195,9 @@ def server(input: Inputs, output: Outputs, session: Session):
     @reactive.Effect
     @reactive.event(input.go)
     def value():
-        print('co')
         global_df.set(return_df_with_similarities(input.txtfull()))
+        print('Done')
         print(global_df.get())
-        print(global_df)
 
 
     # def get_ith_decison(i:int):
@@ -212,20 +211,16 @@ def server(input: Inputs, output: Outputs, session: Session):
             global_number.set(global_number.get() + 1)
 
         if global_df.get() is not None:
-            print("YEY")
             local_copy = global_list.get()
-            new_div = getOneDecision(global_df.get(), global_number.get(), 1000, False)
+            new_div = getOneDecision(global_df.get(), global_number.get(), 1000, input.czytajmore())
             if len(local_copy) == 0:
                 global_list.set(tuple([new_div]))
             else:
                 global_list.set(tuple([*local_copy, new_div]))
 
-            print(len(global_list.get()))
-
     @output
     @render.ui
     def decision():
-        print("heh")
         return div(global_list.get())
 
     # @output
@@ -233,6 +228,11 @@ def server(input: Inputs, output: Outputs, session: Session):
     # def dajDivOrze0():
     #    get_ith_decison(0)
 
+
+    @output
+    @render.ui
+    def czytajmore():
+        return input.czytajmore()
     # @output
     # @render.ui
     # def dajDivOrze1():
